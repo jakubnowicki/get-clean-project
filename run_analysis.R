@@ -27,4 +27,4 @@ for (i in 1:length(activity_labels$V1)) {
 full.data$activityID <- as.factor(full.data$activityID)
 full.data$subjectID <- as.factor(full.data$subjectID)
 group_by(full.data,subjectID,activityID) %>% summarise_each('mean') -> grouped.data
-write.table(x = grouped.data,file = 'grouped.data.txt',row.names = F)
+write.table(x = grouped.data,file = 'grouped_data.txt',row.names = F)
