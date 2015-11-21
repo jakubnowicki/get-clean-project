@@ -1,3 +1,4 @@
+library(dplyr)
 X_train <- read.table("X_train.txt", quote="\"", comment.char="")
 y_train <- read.table("y_train.txt", quote="\"", comment.char="")
 X_test <- read.table("X_test.txt", quote="\"", comment.char="")
@@ -23,4 +24,7 @@ full.data <- full.data[,c(1,2,slct+2)]
 for (i in 1:length(activity_labels$V1)) {
     full.data$activityID <- gsub(pattern = activity_labels$V1[i],replacement = activity_labels$V2[i],
                              x = full.data$activityID) }
-
+full.data$activityID <- as.factor(full.data$activityID)
+full.data$subjectID <- as.factor(full.data$subjectID)
+group_by(full.data,subjectID,activityID) %>% summarise_each('mean') -> grouped.data
+write.table(x = grouped.data,file = 'grouped.data.txt',row.names = F)
