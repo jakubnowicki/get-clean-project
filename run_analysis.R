@@ -18,13 +18,13 @@ test <- cbind(y_test,subject_test,X_test)
 train <- cbind(y_train,subject_train,X_train)
 average.variables <- grep(features$V2,pattern = 'mean')
 std.variables <- grep(features$V2,pattern = 'std')
-full.data <- rbind(train,test)
+tidy.data <- rbind(train,test)
 slct <- sort(c(average.variables,std.variables))
-full.data <- full.data[,c(1,2,slct+2)]
+tidy.data <- tidy.data[,c(1,2,slct+2)]
 for (i in 1:length(activity_labels$V1)) {
-    full.data$activityID <- gsub(pattern = activity_labels$V1[i],replacement = activity_labels$V2[i],
-                             x = full.data$activityID) }
-full.data$activityID <- as.factor(full.data$activityID)
-full.data$subjectID <- as.factor(full.data$subjectID)
-group_by(full.data,subjectID,activityID) %>% summarise_each('mean') -> grouped.data
+    tidy.data$activityID <- gsub(pattern = activity_labels$V1[i],replacement = activity_labels$V2[i],
+                             x = tidy.data$activityID) }
+tidy.data$activityID <- as.factor(tidy.data$activityID)
+tidy.data$subjectID <- as.factor(tidy.data$subjectID)
+group_by(tidy.data,subjectID,activityID) %>% summarise_each('mean') -> grouped.data
 write.table(x = grouped.data,file = 'grouped_data.txt',row.names = F)
