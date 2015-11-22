@@ -21,6 +21,8 @@ std.variables <- grep(features$V2,pattern = 'std')
 tidy.data <- rbind(train,test)
 slct <- sort(c(average.variables,std.variables))
 tidy.data <- tidy.data[,c(1,2,slct+2)]
+freq <- grep('Freq',names(tidy.data))
+tidy.data <- tidy.data[,-(freq+2)]
 for (i in 1:length(activity_labels$V1)) {
     tidy.data$activityID <- gsub(pattern = activity_labels$V1[i],replacement = activity_labels$V2[i],
                              x = tidy.data$activityID) }
