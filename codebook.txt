@@ -1,0 +1,15 @@
+Codebook
+
+
+id variables:
+	activityID - name of the activity
+	subjectID - subject's number
+
+activity variables:
+	same as in raw data;
+	t/f - time/frequency
+	Body/Gravity - body or gravity signals
+	Acc/Gyro - source of signal (accelerometr or gyroscope)
+	Jerk/- - Jerk signals
+	mean()/std() - mean or sandard deviation
+	X/Y/Z - axis
